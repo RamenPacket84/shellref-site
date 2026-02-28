@@ -1,0 +1,746 @@
+/* ============================================================
+   ShellRef — Companion Website Styles
+   Mirrors the iOS app's 1980s technical-manual aesthetic.
+   Three themes driven by [data-theme] on <html>.
+   ============================================================ */
+
+/* Google Fonts fallback for non-Mac platforms */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+/* ============================================================
+   CSS Custom Properties — Theme Definitions
+   ============================================================ */
+
+[data-theme="agedPaper"] {
+    --bg:              #F4EEDF;
+    --sidebar-bg:      #EDE6D5;
+    --card-bg:         #EFE8D8;
+    --code-bg:         #E6DEC9;
+    --text:            #2E1E0F;
+    --text-secondary:  #614A2E;
+    --code-text:       #211508;
+    --accent:          #C69111;
+    --border:          #2E1E0F;
+    --warning-bg:      #F9EDDF;
+    --warning-border:  #2E1E0F;
+    --note-bg:         #F4F1DF;
+    --note-border:     #C69111;
+    --selection-bg:    rgba(198, 145, 17, 0.18);
+    --scrollbar:       #C69111;
+}
+
+[data-theme="phosphorGreen"] {
+    --bg:              #070707;
+    --sidebar-bg:      #060A06;
+    --card-bg:         #0A0E0A;
+    --code-bg:         #040904;
+    --text:            #2EEE2E;
+    --text-secondary:  #1E9E1E;
+    --code-text:       #38FF38;
+    --accent:          #38FF38;
+    --border:          #2EEE2E;
+    --warning-bg:      #0E0E02;
+    --warning-border:  #EEEE2E;
+    --note-bg:         #040E04;
+    --note-border:     #2EEE2E;
+    --selection-bg:    rgba(46, 238, 46, 0.15);
+    --scrollbar:       #2EEE2E;
+}
+
+[data-theme="phosphorAmber"] {
+    --bg:              #070606;
+    --sidebar-bg:      #0A0802;
+    --card-bg:         #0C0A04;
+    --code-bg:         #080602;
+    --text:            #FFB214;
+    --text-secondary:  #C78209;
+    --code-text:       #FFC828;
+    --accent:          #FFC828;
+    --border:          #FFB214;
+    --warning-bg:      #0E0702;
+    --warning-border:  #FF6619;
+    --note-bg:         #0C0A02;
+    --note-border:     #FFB214;
+    --selection-bg:    rgba(255, 178, 20, 0.15);
+    --scrollbar:       #FFB214;
+}
+
+/* ============================================================
+   Typography Variables
+   ============================================================ */
+
+:root {
+    --font-body: "American Typewriter", "Special Elite", "Courier New", serif;
+    --font-code: "Menlo", "Courier New", monospace;
+
+    --topbar-height: 52px;
+    --sidebar-width: 240px;
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100dvh;
+    overflow: hidden; /* prevent body scroll; panels scroll internally */
+}
+
+::selection {
+    background: var(--selection-bg);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar);
+    opacity: 0.4;
+    border-radius: 3px;
+}
+
+/* ============================================================
+   Top Bar
+   ============================================================ */
+
+#topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--topbar-height);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    /* double-rule: outer border + inner box-shadow line */
+    box-shadow: 0 3px 0 0 var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    z-index: 100;
+}
+
+#topbar-logo {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--text);
+    flex: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+}
+
+#topbar-logo:hover {
+    opacity: 0.75;
+}
+
+#topbar-logo span {
+    color: var(--accent);
+}
+
+#topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#theme-toggle:hover {
+    background: var(--selection-bg);
+}
+
+#ios-cta-top {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#ios-cta-top:hover {
+    background: var(--selection-bg);
+    text-decoration: none;
+}
+
+/* Hamburger — mobile only */
+#hamburger {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+#app {
+    display: flex;
+    height: 100dvh;
+    padding-top: var(--topbar-height);
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+
+#sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    box-shadow: 3px 0 0 0 var(--border); /* double-rule right edge */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#search-box {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+#search-input {
+    width: 100%;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    padding: 6px 8px;
+    outline: none;
+    letter-spacing: 0.5px;
+}
+
+#search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+#search-input:focus {
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+#nav-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0 16px;
+}
+
+.nav-group-header {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 14px 14px 5px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    font-family: var(--font-body);
+    font-size: 0.83rem;
+    color: var(--text);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    border-left: 2px solid transparent;
+    transition: background 0.1s;
+    user-select: none;
+}
+
+.nav-item:hover {
+    background: var(--selection-bg);
+}
+
+.nav-item.active {
+    border-left-color: var(--accent);
+    color: var(--accent);
+    background: var(--selection-bg);
+}
+
+.nav-item-icon {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+}
+
+/* ============================================================
+   Main Content Area
+   ============================================================ */
+
+#content {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--bg);
+    padding: 32px 40px 60px;
+}
+
+/* ============================================================
+   Cover State (no section selected)
+   ============================================================ */
+
+#cover-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 32px;
+    gap: 28px;
+}
+
+#cover-state img.light-cover,
+#cover-state img.dark-cover {
+    max-width: 480px;
+    width: 100%;
+}
+
+#cover-state img.dark-cover {
+    display: none;
+}
+
+[data-theme="phosphorGreen"] #cover-state img.light-cover,
+[data-theme="phosphorAmber"] #cover-state img.light-cover {
+    display: none;
+}
+
+[data-theme="phosphorGreen"] #cover-state img.dark-cover,
+[data-theme="phosphorAmber"] #cover-state img.dark-cover {
+    display: block;
+}
+
+#ios-cta-hero {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    /* double-rule */
+    outline: 1px solid var(--accent);
+    outline-offset: 3px;
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    padding: 12px 28px;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#ios-cta-hero:hover {
+    background: var(--selection-bg);
+    text-decoration: none;
+}
+
+/* ── Character Strip ───────────────────────────────────── */
+
+.character-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding-top: 8px;
+    /* 5 × 160px + 4 × 16px gap = 864px; give a bit of room */
+    max-width: 900px;
+    width: 100%;
+}
+
+.character-img {
+    /* Square images — pin both dims so flexbox doesn't inflate width */
+    height: 160px;
+    width: 160px;
+    object-fit: contain;
+    /* Unify shading across illustrations — sepia gives aged-ink consistency */
+    filter: sepia(0.5);
+}
+
+@media (max-width: 680px) {
+    .character-img {
+        height: 120px;
+        width: 120px;
+    }
+}
+
+/* ============================================================
+   Section Header
+   ============================================================ */
+
+#section-header {
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 3px 0 0 var(--border);
+}
+
+#section-title {
+    font-family: var(--font-body);
+    font-size: 1.45rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+/* ============================================================
+   Topic Cards
+   ============================================================ */
+
+.topic-card {
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    /* double-rule via outline */
+    outline: 1px solid var(--border);
+    outline-offset: 3px;
+    background: var(--card-bg);
+    padding: 20px 22px;
+}
+
+.topic-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.topic-summary {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+}
+
+.topic-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 14px 0;
+    opacity: 0.4;
+}
+
+/* ============================================================
+   Block: Text
+   ============================================================ */
+
+.block-text {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 14px;
+    white-space: pre-wrap;
+    letter-spacing: 0.2px;
+}
+
+.block-text:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================================
+   Block: Code
+   ============================================================ */
+
+.block-code {
+    margin-bottom: 14px;
+}
+
+.block-code:last-child {
+    margin-bottom: 0;
+}
+
+.code-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.code-label::before {
+    content: "▸ ";
+    color: var(--accent);
+}
+
+.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 0; /* sharp corners, matching iOS */
+    padding: 14px 16px;
+    overflow-x: auto;
+}
+
+.code-block code {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--code-text);
+    line-height: 1.7;
+    white-space: pre;
+    display: block;
+}
+
+/* ============================================================
+   Block: Callout (Note & Warning)
+   ============================================================ */
+
+.block-callout {
+    display: flex;
+    gap: 12px;
+    border: 1px solid;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    letter-spacing: 0.2px;
+}
+
+.block-callout:last-child {
+    margin-bottom: 0;
+}
+
+.block-callout.note {
+    background: var(--note-bg);
+    border-color: var(--note-border);
+    border-left-width: 3px;
+    color: var(--text);
+}
+
+.block-callout.warning {
+    background: var(--warning-bg);
+    border-color: var(--warning-border);
+    border-left-width: 3px;
+    color: var(--text);
+}
+
+.callout-icon {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    margin-top: 1px;
+}
+
+.callout-text {
+    flex: 1;
+}
+
+/* ============================================================
+   Block: Table
+   ============================================================ */
+
+.block-table {
+    margin-bottom: 14px;
+    overflow-x: auto;
+}
+
+.block-table:last-child {
+    margin-bottom: 0;
+}
+
+.table-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.block-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text);
+}
+
+.block-table th {
+    text-align: left;
+    font-weight: bold;
+    font-size: 0.76rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 6px 10px;
+    background: var(--code-bg);
+}
+
+.block-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+}
+
+.block-table tr:last-child td {
+    border-bottom: none;
+}
+
+.block-table tr:nth-child(even) td {
+    background: rgba(0,0,0,0.03);
+}
+
+[data-theme="phosphorGreen"] .block-table tr:nth-child(even) td,
+[data-theme="phosphorAmber"] .block-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.03);
+}
+
+/* ============================================================
+   Search Results
+   ============================================================ */
+
+#search-results {
+    padding: 4px 0;
+}
+
+.search-result-item {
+    padding: 8px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    opacity: 0.85;
+}
+
+.search-result-item:hover {
+    background: var(--selection-bg);
+    opacity: 1;
+}
+
+.search-result-title {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: bold;
+}
+
+.search-result-section {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+.search-empty {
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================================
+   Responsive — Mobile
+   ============================================================ */
+
+@media (max-width: 680px) {
+    :root {
+        --sidebar-width: 100%;
+    }
+
+    #hamburger {
+        display: block;
+    }
+
+    #ios-cta-top {
+        display: none;
+    }
+
+    #theme-toggle {
+        font-size: 0.7rem;
+        padding: 4px 7px;
+    }
+
+    #sidebar {
+        position: fixed;
+        top: var(--topbar-height);
+        left: 0;
+        bottom: 0;
+        z-index: 90;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+        box-shadow: none;
+        border-right: 1px solid var(--border);
+    }
+
+    #sidebar.open {
+        transform: translateX(0);
+    }
+
+    #content {
+        padding: 20px 16px 40px;
+    }
+
+    .topic-card {
+        outline: none; /* double-rule too tight on small screens */
+        margin-bottom: 20px;
+    }
+}
+
+/* ============================================================
+   Tablet
+   ============================================================ */
+
+@media (max-width: 900px) and (min-width: 681px) {
+    :root {
+        --sidebar-width: 200px;
+    }
+
+    #content {
+        padding: 24px 24px 48px;
+    }
+}

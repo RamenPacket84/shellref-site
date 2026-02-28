@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="agedPaper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShellRef — A technical reference for Bash and Zsh scripting. Covers syntax, control flow, functions, string processing, file I/O, processes, and more.">
+    <title>ShellRef — Bash & Zsh Reference</title>
+
+    <!-- Canonical: update when published -->
+    <!-- <link rel="canonical" href="https://yourdomain.com/shellref/"> -->
+
+    <!-- Google Fonts — Special Elite as cross-platform fallback for American Typewriter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ── Top Bar ─────────────────────────────────────── -->
+    <header id="topbar">
+        <!-- Hamburger (mobile only) -->
+        <button id="hamburger" aria-label="Toggle navigation">☰</button>
+
+        <!-- Logo / title -->
+        <div id="topbar-logo" onclick="showCover()" role="button" tabindex="0" aria-label="ShellRef home">
+            Shell<span>Ref</span>
+        </div>
+
+        <!-- Right-side controls -->
+        <div id="topbar-right">
+            <button id="theme-toggle" aria-label="Cycle theme">[ PAPER ]</button>
+            <a id="ios-cta-top" href="#" target="_blank" rel="noopener"
+               aria-label="Get ShellRef on the App Store">
+                Get iOS App ↗
+            </a>
+        </div>
+    </header>
+
+    <!-- ── Main App Layout ────────────────────────────── -->
+    <div id="app">
+
+        <!-- ── Sidebar ──────────────────────────────── -->
+        <nav id="sidebar" aria-label="Sections">
+
+            <!-- Search -->
+            <div id="search-box">
+                <input
+                    id="search-input"
+                    type="search"
+                    placeholder="Search topics…"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Search topics"
+                >
+            </div>
+
+            <!-- Navigation list (built by app.js) -->
+            <div id="nav-list" role="list"></div>
+
+        </nav>
+
+        <!-- ── Content Pane ──────────────────────────── -->
+        <main id="content" aria-live="polite">
+            <!-- Populated by app.js — cover image shown by default -->
+        </main>
+
+    </div>
+
+    <!-- Content data (all 15 sections, no fetch needed) -->
+    <script src="data.js"></script>
+    <!-- App logic -->
+    <script src="app.js"></script>
+
+</body>
+</html>
