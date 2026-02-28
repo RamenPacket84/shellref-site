@@ -280,6 +280,17 @@ a:hover {
     padding: 8px 0 16px;
 }
 
+#sidebar-copyright {
+    padding: 10px 14px 14px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
 .nav-group-header {
     font-family: var(--font-body);
     font-size: 0.68rem;
