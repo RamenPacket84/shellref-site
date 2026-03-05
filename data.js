@@ -7,6 +7,8 @@ const SHELLREF_CONTENT = [
     "title": "History of Bash",
     "shell": "bash",
     "icon": "clock.arrow.circlepath",
+    "section_description": "The Bourne Again Shell was created by Brian Fox for the GNU Project in 1987–1988. It replaced the Bourne Shell as the default command interpreter on most Linux systems and macOS prior to Catalina.",
+    "illustration": "BashHistory",
     "topics": [
       {
         "id": "bash-history-origins",
@@ -208,6 +210,8 @@ const SHELLREF_CONTENT = [
     "title": "Shell Basics",
     "shell": "bash",
     "icon": "terminal",
+    "section_description": "Every Bash script begins with a shebang, sets variables, and applies quoting rules to control word splitting. This section covers the foundational syntax every Bash programmer must know before writing their first script.",
+    "illustration": "ShellBasics",
     "topics": [
       {
         "id": "bash-basics-shebang",
@@ -599,6 +603,8 @@ const SHELLREF_CONTENT = [
     "title": "Control Flow",
     "shell": "bash",
     "icon": "arrow.triangle.branch",
+    "section_description": "Scripts make decisions using if/elif/else, repeat tasks with for and while loops, and branch on multiple values with case. Bash control flow is driven by command exit codes, not boolean values.",
+    "illustration": "ControlFlow",
     "topics": [
       {
         "id": "bash-cf-if",
@@ -813,6 +819,8 @@ const SHELLREF_CONTENT = [
     "title": "Functions",
     "shell": "bash",
     "icon": "curlybraces",
+    "section_description": "Functions let you define reusable blocks of commands, accept positional arguments, return status codes, and scope local variables. They are the primary tool for organising scripts beyond a few lines.",
+    "illustration": "Functions",
     "topics": [
       {
         "id": "bash-fn-declaration",
@@ -1004,6 +1012,8 @@ const SHELLREF_CONTENT = [
     "title": "Strings and Arrays",
     "shell": "bash",
     "icon": "list.bullet.rectangle",
+    "section_description": "Parameter expansion provides rich built-in operators for measuring, slicing, replacing, and transforming strings without external tools. Indexed arrays hold ordered lists and support slices, appending, and iteration.",
+    "illustration": "StringsAndArrays",
     "topics": [
       {
         "id": "bash-str-length-slice",
@@ -1283,6 +1293,8 @@ const SHELLREF_CONTENT = [
     "title": "File I/O and Redirection",
     "shell": "bash",
     "icon": "doc.text",
+    "section_description": "Redirection connects a command's standard streams to files, pipelines, or /dev/null. Here documents and process substitution provide flexible inline input and output without temporary files.",
+    "illustration": "FileIOandRedirection",
     "topics": [
       {
         "id": "bash-io-redirection",
@@ -1566,6 +1578,8 @@ const SHELLREF_CONTENT = [
     "title": "Processes and Jobs",
     "shell": "bash",
     "icon": "cpu",
+    "section_description": "Bash's job control system lets you run commands in the background, suspend foreground tasks with Ctrl-Z, and manage multiple concurrent processes from a single terminal session.",
+    "illustration": "ProcessesAndJobs",
     "topics": [
       {
         "id": "bash-proc-background",
@@ -1796,6 +1810,8 @@ const SHELLREF_CONTENT = [
     "title": "Best Practices",
     "shell": "bash",
     "icon": "checkmark.seal",
+    "section_description": "Defensive scripting starts with strict mode flags that catch undefined variables, failed commands, and broken pipelines early. This section covers the conventions found in production-quality, peer-reviewed shell scripts.",
+    "illustration": "BestPractices",
     "topics": [
       {
         "id": "bash-bp-set-flags",
@@ -2014,6 +2030,8 @@ const SHELLREF_CONTENT = [
     "title": "Zsh vs Bash",
     "shell": "zsh",
     "icon": "arrow.left.arrow.right",
+    "section_description": "Zsh is largely compatible with Bash but introduces subtle behavioural differences in arrays, globbing, and word splitting. Understanding these distinctions prevents hard-to-debug errors when porting scripts between shells.",
+    "illustration": "ZshVsBash",
     "topics": [
       {
         "id": "zsh-diff-overview",
@@ -2229,6 +2247,8 @@ const SHELLREF_CONTENT = [
     "title": "Zsh Globbing",
     "shell": "zsh",
     "icon": "asterisk",
+    "section_description": "Zsh's extended glob operators match complex patterns that would require find or grep in Bash. Qualifier expressions filter by file type, size, permission, and modification time directly within the glob pattern.",
+    "illustration": "ZshGlobbing",
     "topics": [
       {
         "id": "zsh-glob-extended",
@@ -2458,6 +2478,8 @@ const SHELLREF_CONTENT = [
     "title": "Zsh Arrays",
     "shell": "zsh",
     "icon": "square.stack",
+    "section_description": "Zsh arrays use 1-based indexing and do not require the declare keyword. They support associative arrays, negative indexing, and a broader set of expansion flags than their Bash equivalents.",
+    "illustration": "ZshArrays",
     "topics": [
       {
         "id": "zsh-arr-declaration",
@@ -2631,6 +2653,8 @@ const SHELLREF_CONTENT = [
     "title": "Zsh Configuration",
     "shell": "zsh",
     "icon": "slider.horizontal.3",
+    "section_description": "Zsh loads a hierarchy of startup files depending on whether the shell is interactive, a login shell, or a script. Understanding the load order is essential for writing configuration that works reliably across all shell invocation types.",
+    "illustration": "ZshConfiguration",
     "topics": [
       {
         "id": "zsh-cfg-startup-files",
@@ -2925,6 +2949,8 @@ const SHELLREF_CONTENT = [
     "title": "Text Processing",
     "shell": "both",
     "icon": "text.magnifyingglass",
+    "section_description": "The classic Unix text utilities — grep, sed, awk, cut, and sort — remain the fastest tools for searching, transforming, and summarising structured text directly on the command line.",
+    "illustration": "TextProcessing",
     "topics": [
       {
         "id": "cmd-grep",
@@ -3190,6 +3216,8 @@ const SHELLREF_CONTENT = [
     "title": "File Commands",
     "shell": "both",
     "icon": "folder.badge.gearshape",
+    "section_description": "find, cp, mv, ln, and chmod are the core tools for locating, copying, linking, and setting permissions on files and directories across any Unix-compatible filesystem.",
+    "illustration": "FileCommands",
     "topics": [
       {
         "id": "cmd-find",
@@ -3395,6 +3423,8 @@ const SHELLREF_CONTENT = [
     "title": "System Commands",
     "shell": "both",
     "icon": "cpu",
+    "section_description": "ps, top, kill, df, and du provide real-time visibility into running processes, CPU and memory usage, disk space, and overall system performance without requiring additional monitoring software.",
+    "illustration": "SystemCommands",
     "topics": [
       {
         "id": "cmd-ps",

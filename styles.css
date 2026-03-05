@@ -449,6 +449,30 @@ a:hover {
 }
 
 /* ============================================================
+   Section Intro Block (description + illustration)
+   ============================================================ */
+
+.section-intro {
+    margin-bottom: 28px;
+    overflow: hidden; /* clearfix for floated illustration */
+}
+
+.section-illustration {
+    float: right;
+    width: 130px;
+    margin-left: 20px;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.75;
+    letter-spacing: 0.2px;
+}
+
+/* ============================================================
    Topic Cards
    ============================================================ */
 
@@ -477,6 +501,16 @@ a:hover {
     color: var(--text-secondary);
     margin-bottom: 16px;
     letter-spacing: 0.3px;
+}
+
+.topic-description {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.75;
+    margin-top: 10px;
+    margin-bottom: 0;
+    letter-spacing: 0.2px;
 }
 
 .topic-divider {

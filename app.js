@@ -154,6 +154,26 @@ function selectSection(id) {
     header.innerHTML = `<div id="section-title">${escapeHtml(section.title)}</div>`;
     contentEl.appendChild(header);
 
+    // Section intro block (description + illustration)
+    if (section.section_description || section.illustration) {
+        const intro = document.createElement("div");
+        intro.className = "section-intro";
+        if (section.illustration) {
+            const img = document.createElement("img");
+            img.src = `assets/${section.illustration}.png`;
+            img.alt = "";
+            img.className = "section-illustration";
+            intro.appendChild(img);
+        }
+        if (section.section_description) {
+            const desc = document.createElement("p");
+            desc.className = "section-description";
+            desc.textContent = section.section_description;
+            intro.appendChild(desc);
+        }
+        contentEl.appendChild(intro);
+    }
+
     // Topic cards
     if (section.topics && section.topics.length > 0) {
         section.topics.forEach(topic => {
@@ -185,6 +205,14 @@ function renderTopicCard(topic) {
         summary.className = "topic-summary";
         summary.textContent = topic.summary;
         card.appendChild(summary);
+    }
+
+    // Topic description
+    if (topic.topic_description) {
+        const desc = document.createElement("p");
+        desc.className = "topic-description";
+        desc.textContent = topic.topic_description;
+        card.appendChild(desc);
     }
 
     // Divider before blocks
@@ -313,9 +341,9 @@ function showCover() {
     const cover = document.createElement("div");
     cover.id = "cover-state";
     cover.innerHTML = `
-        <img class="light-cover" src="assets/ShellReff1.png" alt="ShellRef">
-        <img class="dark-cover"  src="assets/ShelReff2.png"  alt="ShellRef">
-        <a id="ios-cta-hero" href="#" target="_blank" rel="noopener">
+        <img class="light-cover" src="assets/ShellRef1.png" alt="ShellRef">
+        <img class="dark-cover"  src="assets/ShellRef2.png"  alt="ShellRef">
+        <a id="ios-cta-hero" href="https://apps.apple.com/us/app/shellref/id6759814118" target="_blank" rel="noopener">
             Get the iOS App
         </a>
         <div class="character-strip">
