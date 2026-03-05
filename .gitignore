@@ -1,5 +1,12 @@
+# Ignore the .claude directory
 .claude/
+
+# Ignore the generate_data.py file
 generate_data.py
-generate_data.py
-generate_data.py
-generate_data.py
+
+# Common patterns to ignore
+node_modules/
+*.log
+*.DS_Store
+.env
+__pycache__/
