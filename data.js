@@ -299,6 +299,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-basics-quoting",
         "title": "Quoting Rules",
         "summary": "How single quotes, double quotes, and backslashes affect expansion.",
+        "topic_description": "Shell quoting can feel arbitrary at first, but follows one consistent rule: always double-quote variable expansions ($var, $@, $(cmd)) unless you deliberately want word splitting or glob expansion. Single quotes are for strings that should be taken completely literally — no variable expansion, no escape sequences. When in doubt, use double quotes.",
         "tags": [
           "beginner",
           "syntax"
@@ -536,6 +537,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-basics-exit-codes",
         "title": "Exit Codes",
         "summary": "How commands signal success or failure, and how to act on the result.",
+        "topic_description": "Exit codes are the primary communication channel between commands in a shell script. Unlike most programming languages where 0 is falsy, in shell 0 means success (true) and any non-zero value means failure (false). This is why && runs the next command only on success, and || runs it only on failure. Understanding exit codes is the key to writing reliable conditional logic.",
         "tags": [
           "beginner",
           "best-practice"
@@ -610,6 +612,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-cf-if",
         "title": "if / elif / else",
         "summary": "Branch execution based on command exit status or test conditions.",
+        "topic_description": "The most important thing to understand about if in Bash is that it tests the exit code of a command — not a boolean value. A command that exits 0 is treated as true; any non-zero exit is false. The [ ] and [[ ]] constructs are just commands that return 0 or 1 based on their evaluation. Once this clicks, Bash conditionals stop feeling like magic.",
         "tags": [
           "beginner",
           "syntax",
@@ -733,6 +736,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-cf-while",
         "title": "while and until Loops",
         "summary": "Repeat a block while a condition is true — or until it becomes true.",
+        "topic_description": "Piping into while read is a common beginner mistake — because a pipe creates a subshell, any variables set inside the loop are lost the moment it ends. Use input redirection (while IFS= read -r line < file) or process substitution (< <(command)) instead. The variable survives, the loop body behaves as expected.",
         "tags": [
           "beginner",
           "syntax",
@@ -880,6 +884,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-fn-return",
         "title": "Return Values",
         "summary": "Functions communicate results through exit status and stdout — not return values.",
+        "topic_description": "Functions in Bash cannot return arbitrary values the way most languages allow. The return keyword only sets an exit code (0–255). To pass back a string or number, the idiomatic pattern is to print the value with echo and capture it with command substitution: result=$(my_function). This spawns a subshell but is the standard approach in real scripts.",
         "tags": [
           "intermediate",
           "functions"
@@ -933,6 +938,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-fn-local",
         "title": "Local Variables",
         "summary": "Prevent function variables from leaking into the enclosing scope.",
+        "topic_description": "Bash uses dynamic scoping — a local variable declared in a function is visible to any function that function calls. This differs from most languages. In practice, always declare local at the top of every function to prevent variables from leaking into or being unexpectedly read from the calling scope.",
         "tags": [
           "intermediate",
           "functions",
@@ -1072,6 +1078,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-str-defaults",
         "title": "Default and Fallback Expansion",
         "summary": "Substitute defaults, assign on unset, and error on missing values.",
+        "topic_description": "These operators are the idiomatic way to handle optional configuration in Bash. Instead of writing a full if block to check whether a variable is set, a single expansion handles it inline. They are especially useful for environment variable overrides: PORT=${PORT:-8080} lets a caller supply their own port by setting PORT before running the script, while falling back to 8080 otherwise.",
         "tags": [
           "intermediate",
           "parameter-expansion",
@@ -1373,6 +1380,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-io-file-descriptors",
         "title": "File Descriptors",
         "summary": "Open, use, and close custom file descriptors for advanced I/O control.",
+        "topic_description": "Every running process has file descriptors — numbered handles to open files or streams. File descriptor 0 is stdin, 1 is stdout, and 2 is stderr. When you write 2>&1, you are saying: redirect file descriptor 2 to wherever file descriptor 1 currently points. Most scripts only use 0, 1, and 2, but Bash lets you open additional descriptors (3–9) when you need to read from and write to multiple files simultaneously.",
         "tags": [
           "advanced",
           "io"
@@ -1422,6 +1430,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-io-heredoc",
         "title": "Here Documents",
         "summary": "Embed multi-line strings directly in a script without a separate file.",
+        "topic_description": "A here document lets you embed a multi-line block of text directly in your script without creating a temporary file. Think of <<EOF as: treat everything until EOF as if it were a file you piped in. This is most useful when generating config files, writing SQL queries, or passing several lines of structured input to a single command.",
         "tags": [
           "intermediate",
           "io",
@@ -1669,6 +1678,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-proc-subshell",
         "title": "Subshells and Command Grouping",
         "summary": "Isolate side effects or group commands to share redirection.",
+        "topic_description": "A subshell is a child process — a copy of your shell that inherits the current environment but cannot modify the parent's variables, working directory, or options. Command groups ({ }) run in the same shell and share state. The practical payoff: wrap a cd and a series of commands in ( ) to change directory temporarily without affecting the rest of the script.",
         "tags": [
           "intermediate",
           "processes"
@@ -1785,6 +1795,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-proc-exec",
         "title": "exec — Replace the Shell Process",
         "summary": "Replace the current shell with a new command without forking.",
+        "topic_description": "exec replaces the current shell process with a new command — no new process is created, and the original shell is gone once the new command starts. It is used in two main scenarios: as the last line of a wrapper script (so the main process receives signals correctly and has the right PID), and for file descriptor manipulation (exec 3>file.txt opens a file descriptor without running any command).",
         "tags": [
           "advanced",
           "processes"
@@ -1817,6 +1828,7 @@ const SHELLREF_CONTENT = [
         "id": "bash-bp-set-flags",
         "title": "Strict Mode: set -euo pipefail",
         "summary": "Three safety flags that catch common scripting errors early.",
+        "topic_description": "By default, Bash is permissive: it silently ignores failed commands, lets you use undefined variables as empty strings, and treats a failed command in a pipeline as success if the last command succeeds. Strict mode changes all three of these defaults so that scripts fail loudly and early — at the point of the actual problem, not three commands later when something is unexpectedly empty.",
         "tags": [
           "best-practice",
           "error-handling"
@@ -2037,6 +2049,7 @@ const SHELLREF_CONTENT = [
         "id": "zsh-diff-overview",
         "title": "Key Differences at a Glance",
         "summary": "The most important behavioural differences between Zsh and Bash.",
+        "topic_description": "Most Bash scripts run in Zsh without changes. The problems come from a small set of subtle differences: arrays start at index 1 instead of 0, unmatched globs throw an error rather than passing the pattern literally, and unquoted variables do not undergo word splitting. If you are switching to Zsh as your interactive shell, these differences mainly affect scripts — everyday command-line use will feel nearly identical to Bash.",
         "tags": [
           "beginner",
           "zsh",
@@ -2660,6 +2673,7 @@ const SHELLREF_CONTENT = [
         "id": "zsh-cfg-startup-files",
         "title": "Startup Files",
         "summary": "Which configuration files Zsh reads, and when each one is loaded.",
+        "topic_description": "The startup file hierarchy explains a common frustration: why does an environment variable work in a terminal but not in a script? Usually because it was set in ~/.zshrc, which is only loaded for interactive shells. Anything that needs to be available everywhere — PATH additions, EDITOR, LANG — belongs in ~/.zshenv. Save aliases, functions, and prompt config for ~/.zshrc.",
         "tags": [
           "beginner",
           "zsh",
@@ -3056,6 +3070,7 @@ const SHELLREF_CONTENT = [
         "id": "cmd-awk",
         "title": "awk — Text Processing Language",
         "summary": "Process columnar text, perform arithmetic, and produce reports.",
+        "topic_description": "awk looks intimidating but 90% of real-world use comes down to two things: printing specific columns ($1, $2, $NF for the last field) and filtering lines by a pattern. The rest — arithmetic, associative arrays, custom separators, formatted output — is available when you need more power, but you do not need to learn it all at once.",
         "tags": [
           "intermediate",
           "text",
